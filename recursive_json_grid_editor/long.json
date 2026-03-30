@@ -1,0 +1,471 @@
+[
+    {
+        "campaign_meta": {
+            "title": "The Quest for the Syntactic Sugar",
+            "dungeon_master_id": 404,
+            "session_date": "2023-10-27T19:00:00Z",
+            "is_active": true,
+            "next_session_scheduled": null
+        },
+        "world_settings": {
+            "difficulty_multiplier": 1.5,
+            "physics_enabled": false,
+            "blocked_regions": [
+                "The Swamp of Infinite Loops",
+                "Null Pointer Peak"
+            ]
+        },
+        "active_parties": [
+            {
+                "party_name": "The Git Committers",
+                "reputation": 85,
+                "members": [
+                    {
+                        "id": "char_001",
+                        "name": "Bardic Script",
+                        "class": "Mage",
+                        "level": 12,
+                        "is_alive": true,
+                        "attributes": {
+                            "strength": 4,
+                            "intelligence": 19,
+                            "charisma": 16
+                        },
+                        "inventory": [
+                            "Staff of Debugging",
+                            "Scroll of Stack Overflow",
+                            {
+                                "item_id": 99,
+                                "name": "Potion of Caffeine",
+                                "charges_remaining": 3,
+                                "effects": [
+                                    "haste",
+                                    "jittery"
+                                ]
+                            }
+                        ],
+                        "active_buffs": [
+                            {
+                                "name": "Focus",
+                                "duration_seconds": 300
+                            },
+                            {
+                                "name": "Plot Armor",
+                                "duration_seconds": 9999
+                            }
+                        ]
+                    },
+                    {
+                        "id": "char_002",
+                        "name": "Sir Render",
+                        "class": "Tank",
+                        "level": 11,
+                        "is_alive": false,
+                        "attributes": {
+                            "strength": 18,
+                            "intelligence": 6,
+                            "charisma": 10
+                        },
+                        "inventory": [
+                            "Broken Shield",
+                            "Heavy Regret"
+                        ],
+                        "active_buffs": []
+                    }
+                ]
+            }
+        ],
+        "world_map": {
+            "grid_dimensions": "3x3",
+            "terrain_matrix": [
+                [
+                    0,
+                    0,
+                    1
+                ],
+                [
+                    0,
+                    2,
+                    1
+                ],
+                [
+                    1,
+                    1,
+                    3
+                ]
+            ],
+            "legend": {
+                "0": "Grassland",
+                "1": "Water",
+                "2": "Volcano (Active)",
+                "3": "Secret Base"
+            }
+        },
+        "quest_log": {
+            "main_story": [
+                {
+                    "quest_id": 101,
+                    "title": "Escape the Tutorial",
+                    "completed": true,
+                    "rewards": {
+                        "gold": 50,
+                        "xp": 100,
+                        "special_item": null
+                    }
+                },
+                {
+                    "quest_id": 102,
+                    "title": "Slay the Server Daemon",
+                    "completed": false,
+                    "sub_objectives": [
+                        [
+                            "Locate the server room",
+                            true
+                        ],
+                        [
+                            "Guess the password",
+                            false
+                        ],
+                        [
+                            "Survive the heat",
+                            false
+                        ]
+                    ]
+                }
+            ]
+        },
+        "loot_tables": {
+            "random_encounters": [
+                [
+                    "Gold Coin",
+                    "Gold Coin",
+                    "Rusty Dagger"
+                ],
+                [
+                    "Health Potion",
+                    "Mana Potion",
+                    null
+                ],
+                [
+                    "Dragon Scale",
+                    null,
+                    null
+                ]
+            ]
+        }
+    },
+    {
+        "id": "obj-001",
+        "meta": {
+            "createdBy": "system",
+            "createdAt": "2026-02-04T09:00:00Z",
+            "tags": [
+                "deep",
+                "example",
+                "config"
+            ]
+        }
+    },
+    {
+        "id": "obj-002",
+        "meta": {
+            "createdBy": "importer",
+            "createdAt": "2025-11-20T16:45:00Z",
+            "tags": []
+        },
+        "payload": {
+            "users": [
+                {
+                    "userId": "u100",
+                    "profile": {
+                        "personal": {
+                            "name": {
+                                "first": "Alice",
+                                "last": "Smith"
+                            },
+                            "contacts": [
+                                {
+                                    "type": "email",
+                                    "value": "alice@example.com"
+                                },
+                                {
+                                    "type": "phone",
+                                    "value": "+1234567890"
+                                }
+                            ]
+                        },
+                        "preferences": {
+                            "notifications": {
+                                "email": true,
+                                "sms": false,
+                                "channels": [
+                                    {
+                                        "channelId": "c1",
+                                        "enabled": true,
+                                        "settings": {
+                                            "frequency": "daily"
+                                        }
+                                    },
+                                    {
+                                        "channelId": "c2",
+                                        "enabled": false
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "sessions": [
+                        {
+                            "sessionId": "s1",
+                            "startedAt": "2026-01-10T10:00:00Z",
+                            "meta": {
+                                "ip": "10.0.0.1"
+                            }
+                        },
+                        {
+                            "sessionId": "s2",
+                            "startedAt": "2026-01-12T14:20:00Z",
+                            "meta": {
+                                "ip": "10.0.0.2"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "userId": "u101",
+                    "profile": {
+                        "personal": {
+                            "name": {
+                                "first": "Bob",
+                                "last": "Jones"
+                            }
+                        }
+                    },
+                    "sessions": []
+                }
+            ]
+        }
+    },
+    {
+        "id": "obj-003",
+        "meta": {
+            "createdBy": "api",
+            "createdAt": "2026-02-01T00:00:00Z",
+            "tags": [
+                "mixed",
+                "arrays"
+            ]
+        },
+        "payload": {
+            "matrix": [
+                [
+                    {
+                        "r": 0,
+                        "c": 0,
+                        "v": {
+                            "a": [
+                                1,
+                                2,
+                                {
+                                    "deep": [
+                                        {
+                                            "x": true,
+                                            "y": null
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "r": 0,
+                        "c": 1,
+                        "v": 0
+                    }
+                ],
+                [
+                    {
+                        "r": 1,
+                        "c": 0,
+                        "v": "text"
+                    },
+                    {
+                        "r": 1,
+                        "c": 1,
+                        "v": [
+                            {
+                                "sub": {
+                                    "more": {
+                                        "evenMore": {
+                                            "value": 3.14
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            ],
+            "references": {
+                "byId": {
+                    "n1": {
+                        "id": "n1",
+                        "link": "obj-001/payload/level1/level2/level3/level4/level5"
+                    },
+                    "n2": {
+                        "id": "n2",
+                        "link": "obj-002/payload/users/0/profile/personal"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": "obj-004",
+        "meta": {
+            "createdBy": "batch",
+            "createdAt": "2026-01-30T22:10:00Z",
+            "tags": [
+                "recurse"
+            ]
+        },
+        "payload": {
+            "tree": {
+                "node": {
+                    "value": "root",
+                    "children": [
+                        {
+                            "value": "child-1",
+                            "children": [
+                                {
+                                    "value": "child-1-1",
+                                    "children": [
+                                        {
+                                            "value": "leaf-1",
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "value": "child-1-2",
+                                    "children": [
+                                        {
+                                            "value": "leaf-2",
+                                            "meta": {
+                                                "priority": 1
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "value": "child-2",
+                            "children": [
+                                {
+                                    "value": "child-2-1",
+                                    "children": [
+                                        {
+                                            "value": "leaf-3"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "value": "child-2-2",
+                                    "children": [
+                                        {
+                                            "value": "leaf-4",
+                                            "extra": {
+                                                "deep": {
+                                                    "count": 7
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "id": "obj-005",
+        "meta": {
+            "createdBy": "tester",
+            "createdAt": "2026-02-04T09:30:00Z",
+            "tags": [
+                "varied"
+            ]
+        },
+        "payload": {
+            "settings": {
+                "levels": [
+                    {
+                        "name": "L1",
+                        "config": {
+                            "k": 1,
+                            "v": [
+                                {
+                                    "x": 10
+                                },
+                                {
+                                    "y": {
+                                        "z": [
+                                            100,
+                                            200,
+                                            300
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "L2",
+                        "config": {
+                            "k": 2,
+                            "v": [
+                                {
+                                    "x": 20
+                                },
+                                {
+                                    "y": {
+                                        "z": [
+                                            400,
+                                            500
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "misc": {
+                    "nullable": null,
+                    "emptyObj": {},
+                    "emptyArr": []
+                }
+            },
+            "logs": [
+                {
+                    "t": "2026-02-03T01:00:00Z",
+                    "msg": "start",
+                    "meta": {
+                        "attempts": [
+                            {
+                                "at": 1,
+                                "ok": false
+                            },
+                            {
+                                "at": 2,
+                                "ok": true
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+]

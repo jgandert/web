@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="icon.svg" sizes="any" type="image/svg+xml">
+        <title>Tools Dashboard</title>
+        <link rel="stylesheet" href="./one.css">
+        <style>
+        /* ------------------------------------------------------------------
+            DASHBOARD SPECIFIC STYLES
+            ------------------------------------------------------------------ */
+        .big {
+            text-align: center;
+            margin-bottom: 40px;
+            border: none;
+            display: block;
+        }
+
+        .big h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--on-surface);
+            letter-spacing: -0.03em;
+        }
+
+        body {
+            display: block;
+            overflow: auto;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .tool-card {
+            background: var(--surface-container);
+            border: 1px solid var(--outline-variant);
+            border-radius: var(--radius);
+            padding: var(--spacing-lg);
+            transition: var(--trans-interactive);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            color: inherit;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--primary) 15%, transparent);
+            text-decoration: none;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--on-surface);
+            letter-spacing: normal;
+        }
+
+        .card-desc {
+            margin: 0 0 24px 0;
+            color: var(--on-surface-variant);
+            font-weight: normal;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            flex-grow: 1;
+            z-index: 1;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 1;
+        }
+
+        .arrow {
+            transition: transform 0.2s;
+            font-size: 18px;
+        }
+
+        .arrow::after {
+            font-family: 'Material Symbols Rounded';
+            content: "arrow_forward";
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            vertical-align: middle;
+        }
+
+        .tool-card:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        /* Decorative Background Icons */
+        .tool-card::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            background-image: var(--bg-icon);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.1;
+            filter: grayscale(100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Individual Icons (SVGs inline for portability, could be images) */
+        .card-markdown {
+            --bg-icon: url("./paste_to_markdown/icon.svg");
+        }
+
+        .card-json {
+            --bg-icon: url("./recursive_json_grid_editor/icon.svg");
+        }
+
+        .card-svg {
+            --bg-icon: url("./svg_export/icon.svg");
+        }
+
+        .card-slicer {
+            --bg-icon: url("./image_slicer/icon.svg");
+        }
+
+        .card-triangle {
+            --bg-icon: url("./triangle_paint/icon.svg");
+        }
+
+        .card-grid {
+            --bg-icon: url("./grid_gen/icon.svg");
+        }
+
+        .card-regex {
+            --bg-icon: url("./visual_regex/icon.svg");
+        }
+
+        .card-ratio {
+            --bg-icon: url("./image_ratio_calculator/icon.svg");
+        }
+
+        .card-jwt {
+            --bg-icon: url("./jwt_decoder/icon.svg");
+        }
+
+        .card-favicon {
+            --bg-icon: url("./favicon_packer/icon.svg");
+        }
+
+        .card-query {
+            --bg-icon: url("./json_query/icon.svg");
+        }
+
+        .card-input {
+            --bg-icon: url("./input_tester/icon.svg");
+        }
+
+        .card-media {
+            --bg-icon: url("./mic_cam_tester/icon.svg");
+        }
+
+        .card-shape {
+            --bg-icon: url("./shape_builder/icon.svg");
+        }
+
+        .card-placeholder {
+            --bg-icon: url("./placeholder_text/icon.svg");
+        }
+
+        .card-browser {
+            --bg-icon: url("./browser_info/icon.svg");
+        }
+
+        .card-sumid {
+            --bg-icon: url("./sumid/icon.svg");
+        }
+
+        .card-decidr {
+            --bg-icon: url("./decidr/icon.svg");
+        }
+
+        .card-time-track {
+            --bg-icon: url("./time_track/icon.svg");
+        }
+
+        .card-file-base64 {
+            --bg-icon: url("./file_to_base64/icon.svg");
+        }
+
+        @media (max-width: 600px) {
+
+            .big h1 {
+                font-size: 2rem;
+            }
+
+            .tool-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    </head>
+
+    <body>
+        <main>
+            <div class="big">
+                <h1>Tool Dashboard</h1>
+            </div>
+
+            <div class="tool-grid">
+                <!-- Paste to Markdown -->
+                <a href="./paste_to_markdown/index.html" class="tool-card card-markdown">
+                    <div class="card-header">
+                        <h2 class="card-title">Paste to Markdown</h2>
+                    </div>
+                    <p class="card-desc">
+                        Convert clipboard HTML or text content into clean Markdown format instantly.
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+
+                <!-- Recursive JSON Grid Editor -->
+                <a href="./recursive_json_grid_editor/index.html" class="tool-card card-json">
+                    <div class="card-header">
+                        <h2 class="card-title">Recursive JSON Editor</h2>
+                    </div>
+                    <p class="card-desc">
+                        Edit structured JSON data with a powerful recursive grid layout interface.
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+
+                <!-- JSON Query -->
+                <a href="./json_query/index.html" class="tool-card card-query" id="tool-json-query">
+                    <div class="card-header">
+                        <h2 class="card-title">JSON Query & Transform Tool</h2>
+                    </div>
+                    <p class="card-desc">
+                        Query, filter, and reshape JSON data using a powerful, lightweight query language.
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+
+                <!-- Visual Regex -->
+                <a href="./visual_regex/index.html" class="tool-card card-regex">
+                    <div class="card-header">
+                        <h2 class="card-title">Visual Regex Builder</h2>
+                    </div>
+                    <p class="card-desc">
+                        Build and test regular expressions visually with a structured tree interface.
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+
+                <!-- Decidr -->
+                <a href="./decidr/index.html" class="tool-card card-decidr">
+                    <div class="card-header">
+                        <h2 class="card-title">Decidr</h2>
+                    </div>
+                    <p class="card-desc">
+                        Pick numbers, compare options, and rank criteria with weighted scoring.
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+
+                <!-- Time Tracker -->
+                <a href="./time_track/index.html" class="tool-card card-time-track">
+                    <div class="card-header">
+                        <h2 class="card-title">Time Tracker</h2>
+                    </div>
+                    <p class="card-desc">
+                        Log your daily working hours, manage overtime balance, and maintain a detailed record of your
+                        activities.
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+
+                <!-- Input Device Tester -->
+                <a href="./input_tester/index.html" class="tool-card card-input">
+                    <div class="card-header">
+                        <h2 class="card-title">Input Device Tester</h2>
+                    </div>
+                    <p class="card-desc">
+                        Test keyboard, mouse, gamepad, touch, and MIDI input signals in real-time.
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+
+                <!-- Media Device Tester -->
+                <a href="./mic_cam_tester/index.html" class="tool-card card-media">
+                    <div class="card-header">
+                        <h2 class="card-title">Media Device Tester</h2>
+                    </div>
+                    <p class="card-desc">
+                        Test your microphone, camera, or screen sharing with real-time audio visualization.
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+
+                <!-- Browser Information -->
+                <a href="./browser_info/index.html" class="tool-card card-browser">
+                    <div class="card-header">
+                        <h2 class="card-title">Browser Information</h2>
+                    </div>
+                    <p class="card-desc">
+                        View comprehensive details about your browser, hardware specifications, and localization settings.
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+
+                <!-- JWT Decoder -->
+                <a href="./jwt_decoder/index.html" class="tool-card card-jwt">
+                    <div class="card-header">
+                        <h2 class="card-title">JWT Decoder</h2>
+                    </div>
+                    <p class="card-desc">
+                        Safely decode and read JSON Web Tokens locally in your browser.
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+
+                <!-- Themed Ipsum Generator -->
+                <a href="./placeholder_text/index.html" class="tool-card card-placeholder">
+                    <div class="card-header">
+                        <h2 class="card-title">Themed Ipsum Generator</h2>
+                    </div>
+                    <p class="card-desc">
+                        Generate placeholder text using Gourmet, Alien, Fantasy, and Corporate themes.
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+
+                <!-- Favicon Packer -->
+                <a href="./favicon_packer/index.html" class="tool-card card-favicon">
+                    <div class="card-header">
+                        <h2 class="card-title">Favicon Packer</h2>
+                    </div>
+                    <p class="card-desc">
+                        Generate a complete, precise set of modern favicon assets client-side from any
+                        logo icon.
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+
+                <!-- Image Slicer -->
+                <a href="./image_slicer/index.html" class="tool-card card-slicer">
+                    <div class="card-header">
+                        <h2 class="card-title">Image Slicer</h2>
+                    </div>
+                    <p class="card-desc">
+                        Slice an image along one axis (horizontally, vertically) and export parts as
+                        a ZIP.
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+
+                <!-- Grid Gen -->
+                <a href="./grid_gen/index.html" class="tool-card card-grid">
+                    <div class="card-header">
+                        <h2 class="card-title">Grid Gen</h2>
+                    </div>
+                    <p class="card-desc">
+                        Create a grid with multiple layers and export it as SVG or PNG.
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+
+                <!-- SVG Export -->
+                <a href="./svg_export/index.html" class="tool-card card-svg">
+                    <div class="card-header">
+                        <h2 class="card-title">SVG Export</h2>
+                    </div>
+                    <p class="card-desc">
+                        Open one or multiple SVG files and export them as JPG, PNG, or ZIP archives
+                        thereof.
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+
+                <!-- Image Ratio Calculator -->
+                <a href="./image_ratio_calculator/index.html" class="tool-card card-ratio">
+                    <div class="card-header">
+                        <h2 class="card-title">Image Ratio Calculator</h2>
+                    </div>
+                    <p class="card-desc">
+                        Find the closest standard aspect ratios for any uploaded image.
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+
+                <!-- Shape Builder -->
+                <a href="./shape_builder/index.html" class="tool-card card-shape">
+                    <div class="card-header">
+                        <h2 class="card-title">Shape Builder</h2>
+                    </div>
+                    <p class="card-desc">
+                        Construct vector shapes programmatically with an interactive JavaScript API and real-time SVG
+                        preview.
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+
+                <!-- Triangle Paint -->
+                <a href="./triangle_paint/index.html" class="tool-card card-triangle">
+                    <div class="card-header">
+                        <h2 class="card-title">Triangle Paint</h2>
+                    </div>
+                    <p class="card-desc">
+                        Create geometric triangular art and export it as an SVG.
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+
+                <!-- File to Base64 -->
+                <a href="./file_to_base64/index.html" class="tool-card card-file-base64">
+                    <div class="card-header">
+                        <h2 class="card-title">File to Base64</h2>
+                    </div>
+                    <p class="card-desc">
+                        Convert binary files to base64 strings or media HTML tags inline.
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+
+
+                <!-- sumid -->
+                <a href="./sumid/index.html" class="tool-card card-sumid">
+                    <div class="card-header">
+                        <h2 class="card-title">sumid</h2>
+                    </div>
+                    <p class="card-desc">
+                        Generate, validate, decode, convert, and merge 256-bit sequential base-50 unique IDs (UUID-like).
+                    </p>
+                    <div class="card-footer">
+                        Open Tool <span class="sym arrow"></span>
+                    </div>
+                </a>
+            </div>
+        </main>
+
+        <footer>
+            © <a href="https://github.com/jgandert" target="_blank" rel="noopener">Joschua Gandert</a> ·
+            <a href="LICENSE.md">Apache 2.0 LICENSE</a> ·
+            Built with <a href="./one_css/index.html">
+                one.css — the <strong>one</strong> c</strong>lass-lite
+                <strong>s</strong>emantic <strong>s</strong>tylesheet
+            </a>
+        </footer>
+    </body>
+
+</html>

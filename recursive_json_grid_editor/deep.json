@@ -1,0 +1,154 @@
+{
+    "system_status": "ONLINE",
+    "version": "9.4.2-beta",
+    "simulation_context": {
+        "cluster_id": "ALPHA-CENTAURI-09",
+        "maintenance_window": null,
+        "reality_check_passed": true,
+        "universes": [
+            {
+                "universe_id": "U-137",
+                "physics_engine": "Newtonian-v3",
+                "is_stable": true,
+                "galaxies": {
+                    "milky_way": {
+                        "sector_7g": {
+                            "solar_systems": [
+                                {
+                                    "star_name": "Sol",
+                                    "planets": {
+                                        "third_rock": {
+                                            "name": "Earth",
+                                            "dominant_species": "Carbon_Bipeds",
+                                            "geolocations": {
+                                                "continent": "North America",
+                                                "region": {
+                                                    "state": "Oregon",
+                                                    "city": "Portland",
+                                                    "municipal_grid": {
+                                                        "block": 402,
+                                                        "building": {
+                                                            "type": "residential",
+                                                            "address_number": 1984,
+                                                            "floors": {
+                                                                "floor_2": {
+                                                                    "apartment_2B": {
+                                                                        "tenant": "Dave_The_Developer",
+                                                                        "rooms": {
+                                                                            "living_room": {
+                                                                                "furniture": [
+                                                                                    {
+                                                                                        "item_type": "couch",
+                                                                                        "material": "synthetic_fabric",
+                                                                                        "condition": "stained",
+                                                                                        "zones": {
+                                                                                            "under_cushions": {
+                                                                                                "darkness_level": 0.9,
+                                                                                                "contents": {
+                                                                                                    "debris_pile": {
+                                                                                                        "composition": [
+                                                                                                            "lint",
+                                                                                                            "popcorn",
+                                                                                                            "change"
+                                                                                                        ],
+                                                                                                        "layers": {
+                                                                                                            "bottom_layer": {
+                                                                                                                "artifacts": [
+                                                                                                                    {
+                                                                                                                        "artifact_type": "ancient_container",
+                                                                                                                        "common_name": "Altoids Tin",
+                                                                                                                        "is_rusted": true,
+                                                                                                                        "interior": {
+                                                                                                                            "lining": "paper",
+                                                                                                                            "stored_items": {
+                                                                                                                                "item_01": {
+                                                                                                                                    "name": "Emergency USB Drive",
+                                                                                                                                    "capacity_gb": 32,
+                                                                                                                                    "filesystem": {
+                                                                                                                                        "format": "exFAT",
+                                                                                                                                        "root": {
+                                                                                                                                            "folder": "DO_NOT_OPEN",
+                                                                                                                                            "subdirectories": {
+                                                                                                                                                "folder_nested": {
+                                                                                                                                                    "name": "Top_Secret_Projects",
+                                                                                                                                                    "files": [
+                                                                                                                                                        {
+                                                                                                                                                            "filename": "inception_game_design.json",
+                                                                                                                                                            "file_type": "application/json",
+                                                                                                                                                            "data_content": {
+                                                                                                                                                                "game_world": {
+                                                                                                                                                                    "level_1": {
+                                                                                                                                                                        "inventory": {
+                                                                                                                                                                            "player_bag": {
+                                                                                                                                                                                "pocket_small": {
+                                                                                                                                                                                    "item_matchbox": {
+                                                                                                                                                                                        "inside": {
+                                                                                                                                                                                            "note": {
+                                                                                                                                                                                                "text_content": "Look closer...",
+                                                                                                                                                                                                "metadata": {
+                                                                                                                                                                                                    "font_size": 2,
+                                                                                                                                                                                                    "ink_molecular_structure": {"carbon_atom_425": {
+                                                                                                                                                                                                            "nucleus": {
+                                                                                                                                                                                                                "protons": 6,
+                                                                                                                                                                                                                "neutrons": 6,
+                                                                                                                                                                                                                "quarks": {
+                                                                                                                                                                                                                    "quark_up_1": {
+                                                                                                                                                                                                                        "spin": "1/2",
+                                                                                                                                                                                                                        "charge": "+2/3",
+                                                                                                                                                                                                                        "string_theory_vibration_mode": {
+                                                                                                                                                                                                                            "frequency_hz": 432,
+                                                                                                                                                                                                                            "embedded_message": "Hello from the micro-verse!"
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                }
+                                                                                                                                                                                                            }}
+                                                                                                                                                                                                    }
+                                                                                                                                                                                                }
+                                                                                                                                                                                            }
+                                                                                                                                                                                        }
+                                                                                                                                                                                    }
+                                                                                                                                                                                }
+                                                                                                                                                                            }
+                                                                                                                                                                        }
+                                                                                                                                                                    }
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                        }
+                                                                                                                                                    ]
+                                                                                                                                                }
+                                                                                                                                            }
+                                                                                                                                        }
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                ]
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}
