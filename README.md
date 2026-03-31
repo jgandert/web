@@ -8,13 +8,15 @@ requires zero server interaction.
 
 - **Various standalone tools** spanning data transformation, image manipulation,
   developer diagnostics, creative design, and productivity.
-- **Unified design system** — all tools share
+- **Unified design system** — all tools<sup>1</sup> share
   [`one.css`](one_css/index.html), a class-lite semantic stylesheet providing
   consistent theming (including dark mode), typography, layout primitives, and
-  iconography across every page. The only exception is "Recursive Grid JSON Editor"), as it has different requirements.
+  iconography across every page. 
 - **Single-file architecture** — each tool is a (nearly) self-contained `index.html`
-  that can be opened directly in a browser with no build step.
-- **Offline-ready** — everything runs in the browser; there is no backend.
+  that can be opened directly in a browser.
+- **Offline-ready** — everything runs in the browser; no backend needed.
+
+<sup>1</sup> "Recursive Grid JSON Editor" has different requirements, so it uses its own style.
 
 ## Getting started
 
@@ -38,7 +40,7 @@ required.
 
 ## License
 
-Licensed under [Apache License, Version 2.0](LICENSE) except for:
+Licensed under [Apache License, Version 2.0](LICENSE) except for the following:
 
 [Paste To Markdown](paste_to_markdown/index.html) is licensed under MIT (due to it being based on a tool with that license).
 
