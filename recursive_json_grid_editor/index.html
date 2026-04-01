@@ -2067,18 +2067,30 @@
             if (explicitType === "number") {
                 // Allow: Backspace, Delete
                 if (["Backspace", "Delete"].includes(e.key)) return;
+
                 // Allow: Ctrl+A/C/V/X/Z
                 if (
                     (e.ctrlKey || e.metaKey) &&
                     ["a", "c", "v", "x", "z"].includes(e.key.toLowerCase())
                 )
                     return;
+
                 // Allow: Numbers 0-9
                 if (/^[0-9]$/.test(e.key)) return;
-                // Allow: . and -
-                if (e.key === "." || e.key === "-") return;
 
-                // Block everything else (letters, symbols, etc)
+                // Contextual keys: validate against current content to prevent corrupt states.
+                // cur is the text before this keystroke (cursor position is not tracked, so
+                // these checks are conservative but guarantee no invalid data is silently produced).
+                const cur = e.target.innerText.trim();
+                // "." only once and only before any exponent
+                if (e.key === "." && /^-?[0-9]+$/.test(cur)) return;
+                // "e"/"E" only once and only after a complete integer or decimal
+                if ((e.key === "e" || e.key === "E") && /^-?[0-9]+(\.[0-9]+)?$/.test(cur)) return;
+                // "-" as leading sign on empty cell, or immediately after "e"/"E"
+                if (e.key === "-" && (cur === "" || /[eE]$/.test(cur))) return;
+                // "+" only as exponent sign immediately after "e"/"E"
+                if (e.key === "+" && /[eE]$/.test(cur)) return;
+
                 e.preventDefault();
             }
         }
@@ -2094,10 +2106,14 @@
             if (trimmed === "true") return { valid: true, value: true, type: "boolean" };
             if (trimmed === "false") return { valid: true, value: false, type: "boolean" };
 
-            // Try number (integers and floats)
-            if (/^-?\d+(\.\d+)?$/.test(trimmed)) {
-                const num = parseFloat(trimmed);
-                if (!isNaN(num)) return { valid: true, value: num, type: "number" };
+            // Try number (integers, floats, and scientific notation)
+            if (/^-?[0-9]/.test(trimmed)) {
+                try {
+                    const parsed = JSON.parse(trimmed);
+                    if (typeof parsed === "number") return { valid: true, value: parsed, type: "number" };
+                } catch (e) {
+                    // Not a valid JSON number
+                }
             }
 
             // Try string (must be wrapped in double quotes)
