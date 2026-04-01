@@ -1125,7 +1125,7 @@
   ],
   "shortcuts": {
     "raw_view": "Ctrl+E",
-    "null_type": "Ctrl+Shift+7"
+    "insert_null": "Ctrl+Shift+N"
   },
   "empty_object_key": {}
 }`;
@@ -2018,8 +2018,6 @@
             const explicitType = e.target.dataset.explicitType;
             const isBool = txt === "true" || txt === "false";
             const isNull = txt === "null";
-            // Check if current text is a number (and not empty)
-            const isNum = !isNaN(Number(txt)) && txt !== "";
 
             // Allow shortcuts (Ctrl+Shift+Num) to always pass to change type
             if ((e.ctrlKey || e.metaKey) && e.shiftKey) return;
@@ -2066,7 +2064,7 @@
             }
 
             // Strict Trap for Numbers (only if explicitly typed as number)
-            if (isNum && explicitType === "number") {
+            if (explicitType === "number") {
                 // Allow: Backspace, Delete
                 if (["Backspace", "Delete"].includes(e.key)) return;
                 // Allow: Ctrl+A/C/V/X/Z
@@ -2255,6 +2253,7 @@
 
         function updatePrimitive(cell, newVal) {
             cell.innerText = String(newVal);
+            cell.dataset.beforeInput = cell.innerText;
             stylePrimitive(cell, newVal);
             setDirty(true);
             saveToLocalStorage();
