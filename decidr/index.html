@@ -548,11 +548,11 @@
             <div id="cfg-comparison" hidden>
                 <div class="segmented-control mt-2" role="group" aria-label="Comparison style">
                     <input type="radio" name="comp-style" id="cs-pairwise" value="pairwise" checked>
-                    <label for="cs-pairwise">Pairwise</label>
+                    <label for="cs-pairwise" data-tooltip="Compare every pair of options head-to-head" data-tooltip-pos="below">Pairwise</label>
                     <input type="radio" name="comp-style" id="cs-elimination" value="elimination">
-                    <label for="cs-elimination">Bracket</label>
+                    <label for="cs-elimination" data-tooltip="Single-elimination tournament bracket" data-tooltip-pos="below">Bracket</label>
                     <input type="radio" name="comp-style" id="cs-sequential" value="sequential">
-                    <label for="cs-sequential">Sequential</label>
+                    <label for="cs-sequential" data-tooltip="Keep or drop each option one at a time" data-tooltip-pos="below">Sequential</label>
                 </div>
             </div>
 
@@ -1089,7 +1089,7 @@
                 const radios = comparisonCfg.querySelectorAll("input");
                 radios.forEach(r => r.disabled = !switchEnabled);
                 if (!switchEnabled) {
-                    comparisonCfg.setAttribute("data-tooltip", "Choice styles are disabled when detail layers are active");
+                    comparisonCfg.setAttribute("data-tooltip", "Comparisons are disabled when criteria or pros & cons are active");
                     comparisonCfg.setAttribute("data-tooltip-pos", "below");
                 } else {
                     comparisonCfg.removeAttribute("data-tooltip");
