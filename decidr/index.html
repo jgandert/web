@@ -736,6 +736,7 @@
 
         let state = newState();
         let savedHistory = tryParse(localStorage.getItem("decidr_history")) || [];
+        let _compSession = 0; // incremented each time a comparison session starts; used to invalidate stale keyboard handlers
 
         // Restore last session
         const saved = tryParse(localStorage.getItem("decidr_state"));
@@ -1426,12 +1427,15 @@
         }
 
         function startPairwise(opts) {
+            const sessionId = ++_compSession;
             const pairs = [];
             for (let i = 0; i < opts.length; i++) for (let j = i + 1; j < opts.length; j++) pairs.push([opts[i], opts[j]]);
             shuffle(pairs);
             const wins = Object.fromEntries(opts.map(o => [o.id, 0]));
+            const pc = document.getElementById("process-content");
             let idx = 0;
             function next() {
+                if (sessionId !== _compSession) return; // stale session — a newer one started
                 if (idx >= pairs.length) {
                     const ranked = opts.slice().sort((a, b) => wins[b.id] - wins[a.id]);
                     return showResult({
@@ -1452,23 +1456,24 @@
                     <button class="matchup-card" id="mc-b" aria-label="${b.name} (Press 2)">${b.name}</button>
                 </div>
                 <div class="group" style="justify-content:center"><button type="button" id="mc-tie" aria-label="Tie (Press 3)">Equal / Skip</button></div>`;
-                document.getElementById("mc-a").onclick = () => { wins[a.id] += 1; idx++; next(); };
-                document.getElementById("mc-b").onclick = () => { wins[b.id] += 1; idx++; next(); };
-                document.getElementById("mc-tie").onclick = () => { wins[a.id] += 0.5; wins[b.id] += 0.5; idx++; next(); };
-
-                // Keyboard shortcuts: 1, 2, or Space/Enter for tie
+                // Keyboard shortcuts: 1, 2, or 3/s for tie
                 const onKey = e => {
-                    if (state.phase !== "process") { window.removeEventListener("keydown", onKey); return; }
-                    if (e.key === "1") { document.getElementById("mc-a").click(); window.removeEventListener("keydown", onKey); }
-                    if (e.key === "2") { document.getElementById("mc-b").click(); window.removeEventListener("keydown", onKey); }
-                    if (e.key === "3" || e.key === "s") { document.getElementById("mc-tie").click(); window.removeEventListener("keydown", onKey); }
+                    if (sessionId !== _compSession || state.phase !== "process") { cleanup(); return; }
+                    if (e.key === "1") document.getElementById("mc-a").click();
+                    if (e.key === "2") document.getElementById("mc-b").click();
+                    if (e.key === "3" || e.key === "s") document.getElementById("mc-tie").click();
                 };
+                function cleanup() { window.removeEventListener("keydown", onKey); }
+                document.getElementById("mc-a").onclick = () => { cleanup(); wins[a.id] += 1; idx++; next(); };
+                document.getElementById("mc-b").onclick = () => { cleanup(); wins[b.id] += 1; idx++; next(); };
+                document.getElementById("mc-tie").onclick = () => { cleanup(); wins[a.id] += 0.5; wins[b.id] += 0.5; idx++; next(); };
                 window.addEventListener("keydown", onKey);
             }
             next();
         }
 
         function startSequential(opts) {
+            const sessionId = ++_compSession;
             let remaining = opts.slice();
             const eliminated = [];
             function next() {
@@ -1496,7 +1501,7 @@
                 });
 
                 const onKey = e => {
-                    if (state.phase !== "process") { cleanup(); return; }
+                    if (sessionId !== _compSession || state.phase !== "process") { cleanup(); return; }
                     const num = parseInt(e.key);
                     if (num >= 1 && num <= remaining.length && num <= 9) {
                         const btns = container.querySelectorAll("button");
@@ -1510,6 +1515,7 @@
         }
 
         function startElimination(opts) {
+            const sessionId = ++_compSession;
             let round = shuffle(opts.slice());
             if (round.length % 2) round.push(null); // bye
             function doRound(bracket) {
@@ -1536,7 +1542,7 @@
                     document.getElementById("em-b").onclick = () => { next.push(b); i += 2; cleanup(); doMatch(); };
 
                     const onKey = e => {
-                        if (state.phase !== "process") { cleanup(); return; }
+                        if (sessionId !== _compSession || state.phase !== "process") { cleanup(); return; }
                         if (e.key === "1") document.getElementById("em-a").click();
                         if (e.key === "2") document.getElementById("em-b").click();
                     };
