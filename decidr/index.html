@@ -1214,7 +1214,7 @@
                 acc += ws[i];
                 const prob = (ws[i] / total * 100).toFixed(1);
                 report.steps.push(`${opts[i].name}: [${start.toFixed(2)} ➞ ${acc.toFixed(2)}) — Prob: ${prob}%`);
-                if (r <= acc && !winner) winner = opts[i];
+                if (r < acc && !winner) winner = opts[i];
             }
             winner ??= opts[opts.length - 1];
             report.result = `Roll ${r.toFixed(4)} fell into **${winner.name}**'s range.`;
@@ -1260,7 +1260,7 @@
                 acc += ws[i];
                 const prob = (ws[i] / total * 100).toFixed(1);
                 report.steps.push(`${opts[i].name}: [${start.toFixed(2)} ➞ ${acc.toFixed(2)}) — Prob: ${prob}%`);
-                if (r <= acc && !winner) winner = opts[i];
+                if (r < acc && !winner) winner = opts[i];
             }
             winner ??= opts[opts.length - 1];
             report.result = `Roll ${r.toFixed(4)} fell into **${winner.name}**'s range.`;
@@ -1531,6 +1531,11 @@
                         if (next.length % 2) next.push(null);
                         return doRound(next);
                     }
+                    const a = bracket[i];
+                    const b = bracket[i + 1];
+                    const pc = document.getElementById("process-content");
+                    if (!a) { next.push(b); i += 2; doMatch(); return; }
+                    if (!b) { next.push(a); i += 2; doMatch(); return; }
                     announce(`Matchup: ${a.name} vs ${b.name}`);
                     pc.innerHTML = `<p class="text-muted">Pick the winner</p>
                     <div class="matchup">
