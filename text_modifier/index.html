@@ -303,6 +303,21 @@ Dates & Times:
     };
     const REVERSE_MORSE = Object.fromEntries(Object.entries(MORSE_CODE).map(([k, v]) => [v, k]));
 
+    const utf8ToBase64 = (str) => {
+        const bytes = new TextEncoder().encode(str);
+        let binString = "";
+        for (let i = 0; i < bytes.byteLength; i++) {
+            binString += String.fromCharCode(bytes[i]);
+        }
+        return btoa(binString);
+    };
+
+    const base64ToUtf8 = (str) => {
+        const binString = atob(str);
+        const bytes = Uint8Array.from(binString, (m) => m.charCodeAt(0));
+        return new TextDecoder().decode(bytes);
+    };
+
     const updateStats = () => {
         const text = inputText.value;
         const lines = text ? text.split(/\r?\n/) : [];
@@ -554,15 +569,17 @@ Dates & Times:
             }
                 break;
             case "hex-encode":
-                result = Array.from(text).map(c => c.charCodeAt(0).toString(16).padStart(2, "0")).join("");
+                result = Array.from(new TextEncoder().encode(text)).map(b => b.toString(16).padStart(2, "0")).join("");
                 break;
             case "hex-decode":
                 try {
-                    const hex = text.replace(/\s+/g, "");
-                    result = "";
+                    const hex = text.replace(/[^0-9a-fA-F]/g, "");
+                    if (hex.length % 2 !== 0) throw new Error("Invalid hex length");
+                    const bytes = new Uint8Array(hex.length / 2);
                     for (let i = 0; i < hex.length; i += 2) {
-                        result += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+                        bytes[i / 2] = parseInt(hex.substr(i, 2), 16);
                     }
+                    result = new TextDecoder().decode(bytes);
                 } catch {
                     result = "Error decoding hex";
                 }
@@ -575,21 +592,21 @@ Dates & Times:
                 break;
             case "base64-encode":
                 try {
-                    result = btoa(text);
+                    result = utf8ToBase64(text);
                 } catch {
                     result = "Error encoding Base64";
                 }
                 break;
             case "base64-decode":
                 try {
-                    result = atob(text);
+                    result = base64ToUtf8(text);
                 } catch {
                     result = "Error decoding Base64";
                 }
                 break;
             case "base64url-encode":
                 try {
-                    result = btoa(text).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+                    result = utf8ToBase64(text).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
                 } catch {
                     result = "Error encoding Base64 URL";
                 }
@@ -598,7 +615,7 @@ Dates & Times:
                 try {
                     let b64 = text.replace(/-/g, "+").replace(/_/g, "/");
                     while (b64.length % 4) b64 += "=";
-                    result = atob(b64);
+                    result = base64ToUtf8(b64);
                 } catch {
                     result = "Error decoding Base64 URL";
                 }
